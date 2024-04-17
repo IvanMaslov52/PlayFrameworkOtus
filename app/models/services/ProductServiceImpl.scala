@@ -28,7 +28,7 @@ object ProductServiceImpl extends ProductService {
   override def updateProduct(productDTO: ProductDTO): Option[ProductDTO] = {
     val index = products.indexWhere(_.id == productDTO.id)
     if (index != -1) {
-      val product = Product(productDTO.id, productDTO.title, productDTO.description)
+      val product = dTOToProduct(productDTO)
       products.update(index, product)
       Some(productToDTO(product))
     } else {
