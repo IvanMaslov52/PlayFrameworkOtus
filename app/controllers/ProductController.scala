@@ -6,11 +6,8 @@ import models.services.ProductServiceImpl
 import play.api.libs.json.Json
 import play.api.mvc._
 
-object ProductController extends Controller{
+object ProductController extends Controller {
 
-  def getProducts: Action[AnyContent] = Action {
-    Ok(Json.toJson(ProductServiceImpl.getProducts))
-  }
 
   def addProduct: Action[ProductDTO] = Action(parse.json[ProductDTO]) { request =>
     Created(Json.toJson(ProductServiceImpl.addProduct(request.body)))
@@ -28,7 +25,7 @@ object ProductController extends Controller{
     }
   }
 
-  def getProductsByTitle(title: Option[Title]): Action[AnyContent] = Action {
-    Ok(Json.toJson(ProductServiceImpl.getProductsByTitle(title)))
+  def getProducts(title: Option[Title]): Action[AnyContent] = Action {
+    Ok(Json.toJson(ProductServiceImpl.getProducts(title)))
   }
 }

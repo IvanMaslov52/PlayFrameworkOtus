@@ -13,9 +13,8 @@ trait ProductService {
 
   def deleteProduct(productId: ProductId): Boolean
 
-  def getProducts: List[ProductDTO]
+  def getProducts(title: Option[Title]): List[ProductDTO]
 
-  def getProductsByTitle(title: Option[Title]): List[ProductDTO]
 }
 
 

@@ -46,19 +46,15 @@ object ProductServiceImpl extends ProductService {
     }
   }
 
-  override def getProducts: List[ProductDTO] = {
-    products.toList.map(productToDTO)
+  override def getProducts(title: Option[Title]): List[ProductDTO] = {
+    title match {
+      case Some(title) => products.toList.filter(_.title == title.raw).map(productToDTO)
+      case None => products.toList.map(productToDTO)
+    }
   }
 
   def getProductItems: List[ProductItemDTO] = {
     productItems.toList.map(x => ProductItemDTO(x.id, x.productId, x.price, x.quantity, x.inStock))
-  }
-
-  override def getProductsByTitle(title: Option[Title]): List[ProductDTO] = {
-    title match {
-      case Some(title) => products.toList.filter(_.title == title.raw).map(productToDTO)
-      case None => List()
-    }
   }
 
   private def dTOToProduct(productDTO: ProductDTO): Product = Product(productDTO.id, productDTO.title, productDTO.description)
