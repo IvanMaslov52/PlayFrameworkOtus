@@ -49,8 +49,8 @@ object ProductServiceImpl extends ProductService {
 
   override def getProducts(title: Option[Title]): List[ProductDTO] = {
     title match {
-      case Some(title) => products.toList.filter(_.title == title.raw).map(productToDTO)
-      case None => products.toList.map(productToDTO)
+      case Some(title) if title.raw.nonEmpty => products.toList.filter(_.title == title.raw).map(productToDTO)
+      case _ => products.toList.map(productToDTO)
     }
   }
 
