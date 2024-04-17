@@ -9,7 +9,7 @@ import play.api.mvc._
 object ProductController extends Controller {
 
 
-  def addProduct: Action[ProductDTO] = Action(parse.json[ProductDTO]) { request =>
+  def addProduct: Action[ProductDTO] = Action(parse.json[ProductDTO](ProductDTO.read)) { request =>
     Created(Json.toJson(ProductServiceImpl.addProduct(request.body)))
   }
 
@@ -18,7 +18,7 @@ object ProductController extends Controller {
       NoContent else NotFound("Product not found")
   }
 
-  def updateProduct: Action[ProductDTO] = Action(parse.json[ProductDTO]) { request =>
+  def updateProduct: Action[ProductDTO] = Action(parse.json[ProductDTO](ProductDTO.reads)) { request =>
     ProductServiceImpl.updateProduct(request.body) match {
       case Some(productDTO: ProductDTO) => Ok(Json.toJson(productDTO))
       case None => NotFound("Product not found")
