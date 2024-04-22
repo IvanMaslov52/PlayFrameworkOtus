@@ -1,15 +1,13 @@
 package models.services
 
 import models.{ProductId, Title}
-import models.dto.ProductDTO
-import play.api.libs.json.JsValue
-import play.api.mvc.{AnyContent, Request, Result}
+import models.dto.{ProductCreateDTO, ProductDTO}
 
 
 trait ProductService {
-  def addProduct(productDTO: ProductDTO): ProductDTO
+  def addProduct(productCreateDTO: ProductCreateDTO): ProductDTO
 
-  def updateProduct(productDTO: ProductDTO): Option[ProductDTO]
+  def updateProducts(productUpdateDTO: ProductDTO): Option[ProductDTO]
 
   def deleteProduct(productId: ProductId): Boolean
 
