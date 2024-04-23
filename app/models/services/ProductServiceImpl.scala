@@ -24,6 +24,7 @@ object ProductServiceImpl extends ProductService {
   override def addProduct(productCreateDTO: ProductCreateDTO): ProductDTO = {
     if (products.exists { case (_, value) => value.title == productCreateDTO.title }) {
       val product = products.find { case (_, value) => value.title == productCreateDTO.title }.get._2
+      addProductItems(product.id, productCreateDTO.productItems)
       productToDTO(product)
     }
     else {
