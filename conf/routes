@@ -21,4 +21,7 @@ POST /login                    controllers.IndexController.loginFormSubmit()
 
 # Product routes
 
-GET  /products/list           controllers.ProductController.list
+POST  /products                controllers.ProductController.addProduct
+PUT  /products                 controllers.ProductController.updateProduct
+DELETE /products/:productId    controllers.ProductController.deleteProduct(productId: models.ProductId)
+GET  /products                 controllers.ProductController.getProducts(title: Option[models.Title] ?= None)

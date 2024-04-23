@@ -99,18 +99,18 @@ object IndexController extends Controller{
     Ok("Got " + body)
   }
 
-  def action18 = Action(parse.json[User]){ rc =>
+  def action18: Action[User] = Action(parse.json[User]){ rc =>
     val body: User = rc.body
     Ok(body.toString)
   }
 
-  def action19 = Action(parse.json[User]){ rc =>
+  def action19: Action[User] = Action(parse.json[User]){ rc =>
     val body: User = rc.body
     val jsValue: JsValue = Json.toJson(body)
     Ok(jsValue)
   }
 
-  def index = Action{
+  def index: Action[AnyContent] = Action{
     Ok(views.html.index())
   }
 
