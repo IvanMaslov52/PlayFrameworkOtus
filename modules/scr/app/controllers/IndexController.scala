@@ -130,16 +130,6 @@ object IndexController extends Controller{
     Ok(views.html.login(form))
   }
 
-  def loginFormSubmit() = Action{ implicit req =>
-    form.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.login(formWithErrors)),
-      dto =>
-        // some logging logic
-        Redirect(routes.IndexController.index())
-          .withSession("email" -> dto.email)
-    )
-  }
-
 
 
 

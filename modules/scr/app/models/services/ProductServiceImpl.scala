@@ -6,7 +6,7 @@ import models.dto.{ProductCreateDTO, ProductDTO, ProductItemCreateDTO, ProductIt
 import scala.collection.mutable
 
 
-object ProductServiceImpl extends ProductService {
+class ProductServiceImpl extends ProductService {
   private val products = mutable.Map[String, Product](
     "45628dfc-a25e-4854-97f0-cee12a6a8968" -> Product("45628dfc-a25e-4854-97f0-cee12a6a8968", "product1", "product1"),
     "be2e977b-f4aa-4bc3-a0da-09fe5cefd00f" -> Product("be2e977b-f4aa-4bc3-a0da-09fe5cefd00f", "product1", "product2"),
