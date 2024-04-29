@@ -1,6 +1,7 @@
-@(products: List[models.Product])
+@import models.dao.Product
+@(products: List[Product])
 
-@showProduct(p: models.Product) = {
+@showProduct(p: Product) = {
     <li>@p.title</li>
 }
 
