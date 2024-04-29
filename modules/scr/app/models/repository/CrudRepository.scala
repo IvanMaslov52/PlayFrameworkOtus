@@ -23,4 +23,5 @@ trait CrudRepository[K, Entity <: KeyedEntity[K]] extends PrimitiveTypeMode {
 
   def deleteWhere (whereClause: Entity => LogicalBoolean): Int = transaction(defaultTable.deleteWhere(whereClause))
 
+
 }

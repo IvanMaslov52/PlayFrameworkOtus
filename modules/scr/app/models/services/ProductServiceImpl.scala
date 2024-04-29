@@ -25,7 +25,7 @@ class ProductServiceImpl @Inject()(productRepository: ProductRepository, product
 
   override def updateProducts(productUpdateDTO: ProductDTO): Option[ProductDTO] = {
     val foundedProduct = productRepository.find(productUpdateDTO.id)
-    if (foundedProduct.isDefined && hasItem(productUpdateDTO.productItems)) {
+    if (foundedProduct.isDefined && productItemRepository.findByList(productUpdateDTO.productItems.map(_.id))) {
 
       updateProducts(foundedProduct.get, productUpdateDTO)
       updateItems(productUpdateDTO.productItems)
@@ -74,10 +74,6 @@ class ProductServiceImpl @Inject()(productRepository: ProductRepository, product
     transaction {
       ProductDTO(product.id, product.title, product.description, product.productItems.toList.map(productItemToDTO))
     }
-  }
-
-  private def hasItem(list: List[ProductItemDTO]): Boolean = {
-    list.map(item => productItemRepository.find(item.id).isDefined).forall(Boolean => Boolean)
   }
 
   private def updateItems(list: List[ProductItemDTO]): Unit = {
