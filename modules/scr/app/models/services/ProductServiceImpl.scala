@@ -51,8 +51,8 @@ class ProductServiceImpl @Inject()(productRepository: ProductRepository, product
   override def getProducts(title: Option[Title]): List[ProductDTO] = {
     title match {
       case Some(title) if title.raw.trim.nonEmpty => productRepository
-        .list()
-        .filter(_.title == title)
+        .findWithTitle(title.raw.trim)
+        .toList
         .map(productToDTO)
       case _ => productRepository
         .list()
@@ -61,10 +61,8 @@ class ProductServiceImpl @Inject()(productRepository: ProductRepository, product
   }
 
   private def addProductItems(productId: String, list: List[ProductItemCreateDTO]): Unit = {
-    list.foreach { item =>
-      val id = java.util.UUID.randomUUID.toString
-      productItemRepository.insert(ProductItem(id, productId, item.price, item.quantity, item.inStock))
-    }
+    val result = list.map(item => ProductItem(java.util.UUID.randomUUID.toString, productId, item.price, item.quantity, item.inStock))
+    productItemRepository.insertList(result)
   }
 
   private def productItemToDTO(productItem: ProductItem): ProductItemDTO =
