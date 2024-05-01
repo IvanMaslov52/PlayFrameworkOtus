@@ -3,15 +3,12 @@ package controllers
 import com.google.inject.Inject
 import models.{ProductId, Title}
 import models.dto.{ProductCreateDTO, ProductDTO}
-import models.repository.{ProductItemRepository, ProductRepository}
 import models.services.ProductService
 import play.api.libs.json.Json
 import play.api.mvc._
 
-import java.util.UUID
 
-
-class ProductController @Inject()(val productService: ProductService, productRepository: ProductRepository, productItemRepository: ProductItemRepository) extends Controller {
+class ProductController @Inject()(val productService: ProductService) extends Controller {
 
   def addProduct = Action(parse.json[ProductCreateDTO]) { rc =>
     Created(Json.toJson(productService.addProduct(rc.body)))

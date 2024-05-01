@@ -1,6 +1,6 @@
 package models
 
-import play.api.libs.json.{JsPath, JsValue, Json, Reads, Writes}
+import play.api.libs.json.{Json, Reads, Writes}
 import play.api.mvc.PathBindable
 
 case class UserId(raw: Int)
